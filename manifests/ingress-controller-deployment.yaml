@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ingress-nginx
+  name: ingress-nginx-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: ingress-manager
+  template:
+    metadata:
+      labels:
+        app: ingress-manager
+    spec:
+      serviceAccountName: ingress-manager-sa
+      containers:
+        - name: ingress-manager
+          image: bailu/ingress-controller:1.0.0
+          resources: {}
